@@ -40,7 +40,6 @@ Luego en la oja de estilos, tendremos que importat el framework:
 ```bash
 @import "tailwindcss";
 ```
-
 ## Instalació de otras librerias
 
 Para poder hacer peticiones a la API, tendremos que usar la libreria Axios, para instalarla tendremos que:
@@ -54,6 +53,11 @@ Tambien por el tema de enrutamineto tendremos que instalar la libreria de vue-ro
 npm install vue-router 
 ```
 
+Para el guardado del formulario de Entrenadores usaremos Pinia:
+
+```bash
+npm install pinia
+```
 ## Instalació 
 
 ```bash

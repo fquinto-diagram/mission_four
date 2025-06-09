@@ -5,6 +5,7 @@
     :value="modelValue"
     :placeholder="placeholder"
     :required="required"
+    class="bg-zinc-200/40 my-2 rounded-2xl justify-center mx-auto text-center py-2"
     >
 </template>
 
@@ -18,7 +19,7 @@ const handleInput = (event: Event) =>{
     emit('update:modelValue', value)
 }
 
-const props = withDefaults(defineProps<Input>(),{
+withDefaults(defineProps<Input>(),{
     placeholder: '',
     type: '',
     label: '',

@@ -40,6 +40,7 @@ export function useFetch(url: string) {
 
     return {
         pokeId,
+        genreateId,
         pokemon,
         error,
         loading,

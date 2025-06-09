@@ -5,12 +5,18 @@
     />
     <div class="mx-auto">
       <PokeDemo />
+      
+      <PokeForm />
+
+      <PokeList />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import PokeDemo from './components/PokeDemo.vue'
+import PokeForm from './components/PokeForm.vue';
+import PokeList from './components/PokeList.vue';
 </script>
 
 <style scoped>
