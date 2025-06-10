@@ -13,10 +13,10 @@ export function useFetch(url: string) {
         return Math.floor(Math.random() * 1025) + 1
     }
 
-    const fetchData = async () => {
+    const fetchData = async (id: Number) => {
         loading.value = true
         try {
-            const { data } = await api.get<Pokemon>(`${url}/${genreateId()}`)
+            const { data } = await api.get<Pokemon>(`${url}/${id}`)
             await new Promise(resolve => setTimeout(resolve, 1000))
             pokemon.value = data 
             error.value = null

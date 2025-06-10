@@ -1,7 +1,7 @@
 <template>
 <div class="mt-8 bg-zinc-200/40 rounded-2xl mx-auto max-w-1/2 shadow-xl">
 
-  <h1 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">PokéDemo</h1>
+  <h1 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">PokéDex</h1>
 
   <div v-if="!hasStarted" id="New">
     <PokeButton text="Buscar Pokèmon" @click="startSearch" class="mt-8 mb-8"/>
@@ -18,7 +18,7 @@
   <div v-else-if="pokeName" id="Pokèmon" class="mt-4 mb-8 w-auto">
     <div class="flex flex-col">
       <div class="flex justify-center mt-5 mb-5 mx-5 rounded-2xl">
-        <img :src="pokeImg" :alt="pokeName" @click="toggleShiny" class=" rounded-2xl hover:shadow-xl hover:bg-zinc-300/50 mx-5 w-40">
+        <img :src="pokeImg" :alt="pokeName" style="cursor:pointer" @click="toggleShiny" class=" rounded-2xl hover:shadow-xl hover:bg-zinc-300/50 mx-5 w-40">
         <div>
           <h2 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">{{ pokeName }} {{ isShiny ? '✨':''  }}</h2>
           <span v-for="type in pokeTypes" :key="type.type.name" :class="getTypeColor(type.type.name)" class="flex flex-row justify-center mx-autp my-2 ml-2 px-3 rounded-2xl">{{ type.type.name }}</span>
@@ -41,50 +41,28 @@ import { ref } from 'vue'
 import api from './composables/api'
 import { useFetch } from './composables/apiFetch'
 import PokeButton from './PokeButton.vue'
+import { getTypeColor } from './composables/types'
 
 
 const hasStarted = ref(false)
+
 const startSearch = () => {
   hasStarted.value = true
-  fetchData()
+  fetchData(genreateId())
 }
 
 const apiURL = ref(api.defaults.baseURL as string)
 const { 
-  pokeName, 
+  genreateId,
+  pokeName,   
   pokeTypes,
   pokeImg, 
   error, 
   loading, 
   fetchData, 
   toggleShiny, 
-  isShiny 
+  isShiny,
 } = useFetch(apiURL.value)
-
-const getTypeColor = (type: string): string => {
-  const colors: Record<string, string> = {
-    normal: 'bg-gray-400 text-white',
-    fire: 'bg-red-500 text-white',
-    water: 'bg-blue-500 text-white',
-    electric: 'bg-yellow-400 text-black',
-    grass: 'bg-green-500 text-white',
-    ice: 'bg-blue-200 text-black',
-    fighting: 'bg-red-700 text-white',
-    poison: 'bg-purple-500 text-white',
-    ground: 'bg-yellow-600 text-white',
-    flying: 'bg-indigo-400 text-white',
-    psychic: 'bg-pink-500 text-white',
-    bug: 'bg-lime-500 text-white',
-    rock: 'bg-yellow-800 text-white',
-    ghost: 'bg-purple-700 text-white',
-    dragon: 'bg-indigo-700 text-white',
-    dark: 'bg-gray-800 text-white',
-    steel: 'bg-gray-500 text-white',
-    fairy: 'bg-pink-300 text-black'
-  }
-  
-  return colors[type] || 'bg-gray-400 text-white'
-}
 
 </script>
 

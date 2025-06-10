@@ -4,6 +4,8 @@
     <div @submit.prevent="handleSubmit" class="mt-8 bg-zinc-200/40 rounded-2xl mx-auto max-w-1/2 shadow-xl">
         <form v-if="newTrainer" class="flex flex-col text-black my-5 ">
         
+        <h1 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">Nuevo Entrenador</h1>
+
         <PokeInput 
             v-model="form.basicInfo.name"
             type="text"
@@ -65,15 +67,11 @@ const form = reactive<Trainer>({
     contact:{
         email: ''
     },
-    pokemon:{
-        assignedPokemon: undefined
-    },
 })
 
 const trainerStore =useTrainerStore()
 const handleSubmit =()=>{
     trainerStore.addTrainer({...form})
     changeState()
-    console.log(trainerStore.getAllTrainers)
 }
 </script>
