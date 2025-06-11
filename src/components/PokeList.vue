@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-2 content-around">
-    <div v-for="trainer in getAllTrainers" :key="trainer.id" class="my-4 bg-zinc-200/40 rounded-2xl mx-3 max-w-2xl shadow-xl ">
+    <div v-for="trainer in trainerStore.trainers" :key="trainer.id" class="my-4 bg-zinc-200/40 rounded-2xl mx-3 max-w-2xl shadow-xl ">
         <h1 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">{{ trainer.basicInfo.name }}</h1>
         <div class="grid grid-cols-2 ">
             <div id="BasicInfo" class="text-black">
@@ -33,7 +33,6 @@ import { getTypeColor } from './composables/types'
 import type { Trainer } from './interface/trainer'
 
 const trainerStore = useTrainerStore()
-const { getAllTrainers } = trainerStore
 const shinyMap= reactive<{[id: number]: boolean}>({})
 const {genreateId, fetchData, pokemon} = useFetch(api.defaults.baseURL as string)
 
