@@ -8,6 +8,7 @@
                 <p>{{ trainer.basicInfo.dni }}</p>
                 <h2 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">E-Mail</h2>
                 <p>{{ trainer.contact.email }}</p>
+                <PokeButton @click="remove(trainer)" text="Eliminar"/>
             </div>
             <div v-if="!trainer.pokemon?.id">
                 <PokeButton text="Assignar Pokémon" @click="asignPokemon(trainer, genreateId())" />
@@ -53,6 +54,14 @@ async function asignPokemon(trainer: Trainer, pokemonId: number) {
 
 function newToggleShiny(trainerId: number){
     shinyMap[trainerId] = !shinyMap[trainerId]
+}
+
+async function remove(trainer:Trainer) {
+    try{
+        trainerStore.removeTrainer(trainer.id)
+    }catch(error){
+        alert(`Hay un error: ${error}`)
+    }
 }
 
 // Computeds is for make the code more easy to read
