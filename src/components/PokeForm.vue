@@ -12,24 +12,28 @@
             placeholder="Nombre"
             required
         />
+        <span v-if="errors.name" class="text-red-500">{{ errors.name }}</span>
         <PokeInput 
             v-model="form.basicInfo.surname"
             type="text"
             placeholder="Apellido"
             required
         />
+        <span v-if="errors.surname" class="text-red-500">{{ errors.surname }}</span>
         <PokeInput 
             v-model="form.basicInfo.dni"
             type="text"
             placeholder="DNI"
             required
         />
+        <span v-if="errors.dni" class="text-red-500">{{ errors.dni }}</span>
         <PokeInput
             v-model="form.contact.email"
             type="email"
             placeholder="ejemplo@correo.com"
             required
         />
+        <span v-if="errors.email" class="text-red-500">{{ errors.email }}</span>
         <div id="Buttons">
             <PokeButton class="mx-auto" text="Enviar"/>
         </div>
@@ -44,9 +48,19 @@ import PokeButton from './PokeButton.vue'
 import { reactive, ref } from 'vue'
 import type { Trainer } from './interface/trainer.ts'
 import { useTrainerStore } from './store/trainers.ts'
+import { useFormValidation } from './composables/formValidation.ts'
+
 
 const generateIdTrainer =  Math.floor(Math.random()*100000)
 const newTrainer = ref(false)
+const trainerStore =useTrainerStore()
+const { validateName, validateDni, validateEmail}= useFormValidation()
+const errors= reactive({
+    name: '',
+    surname:'',
+    dni:'',
+    email:''
+})
 
 const changeState = () => {
   if (newTrainer.value === true){
@@ -69,9 +83,14 @@ const form = reactive<Trainer>({
     },
 })
 
-const trainerStore =useTrainerStore()
 const handleSubmit =()=>{
-    trainerStore.addTrainer({...form})
-    changeState()
+    errors.name = validateName(form.basicInfo.name) ? '': 'Nombre inválido'
+    errors.surname = validateName(form.basicInfo.surname) ? '': 'Apellido inválido'
+    errors.dni = validateDni(form.basicInfo.dni) ? '': 'Dni inválido'
+    errors.email = validateEmail(form.contact.email) ? '': 'Email inválido'
+    if(!errors.name && !errors.dni && !errors.email){
+        trainerStore.addTrainer({...form})
+        changeState()
+    }
 }
 </script>

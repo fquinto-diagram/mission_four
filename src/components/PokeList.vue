@@ -42,7 +42,7 @@ async function asignPokemon(trainer: Trainer, pokemonId: number) {
         await fetchData(pokemonId)
         if (pokemon.value && pokemon.value.id) {
             trainer.pokemon = pokemon.value
-            await trainerStore.updateTrainer(trainer)
+            trainerStore.updateTrainer(trainer)
         }else{
             alert('No se puede obtener el Pokémon')
         }
@@ -58,16 +58,17 @@ function newToggleShiny(trainerId: number){
 
 async function remove(trainer:Trainer) {
     try{
+        
         trainerStore.removeTrainer(trainer.id)
     }catch(error){
         alert(`Hay un error: ${error}`)
     }
 }
 
-// Computeds is for make the code more easy to read
+// Las constantes son constantes Computed, sirven para hacer el codigo más leible
 
 const namePoke = (trainer: Trainer)=> trainer.pokemon?.forms[0].name ?? ''
 const imgPoke = (trainer: Trainer)=> shinyMap[trainer.id] ? trainer.pokemon?.sprites.front_shiny : trainer.pokemon?.sprites.front_default
-const typePoke = (trainer: Trainer)=> trainer.pokemon?.types ?? ''
-// const namePoke = (trainer: Trainer)=> computed(()=> trainer.pokemon?.forms[0].name ?? '')
+const typePoke = (trainer: Trainer)=> trainer.pokemon?.types ?? []
+
 </script>
