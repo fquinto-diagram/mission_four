@@ -12,28 +12,28 @@
             placeholder="Nombre"
             required
         />
-        <span v-if="errors.name" class="text-red-500">{{ errors.name }}</span>
+        <span v-if="nameError" class="text-red-500">{{ nameError.error }}</span>
         <PokeInput 
             v-model="form.basicInfo.surname"
             type="text"
             placeholder="Apellido"
             required
         />
-        <span v-if="errors.surname" class="text-red-500">{{ errors.surname }}</span>
+        <span v-if="surnameError" class="text-red-500">{{ surnameError.error }}</span>
         <PokeInput 
             v-model="form.basicInfo.dni"
             type="text"
             placeholder="DNI"
             required
         />
-        <span v-if="errors.dni" class="text-red-500">{{ errors.dni }}</span>
+        <span v-if="dniError" class="text-red-500">{{ dniError.error }}</span>
         <PokeInput
             v-model="form.contact.email"
             type="email"
             placeholder="ejemplo@correo.com"
             required
         />
-        <span v-if="errors.email" class="text-red-500">{{ errors.email }}</span>
+        <span v-if="emailError" class="text-red-500">{{ emailError.error }}</span>
         <div id="Buttons">
             <PokeButton class="mx-auto" text="Enviar"/>
         </div>
@@ -49,12 +49,14 @@ import { reactive, ref } from 'vue'
 import type { Trainer } from './interface/trainer.ts'
 import { useTrainerStore } from './store/trainers.ts'
 import { useFormValidation } from './composables/formValidation.ts'
+import { useFieldWatcher } from './composables/validationFunction.ts'
 
 
 const generateIdTrainer =  Math.floor(Math.random()*100000)
 const newTrainer = ref(false)
 const trainerStore =useTrainerStore()
 const { validateName, validateDni, validateEmail}= useFormValidation()
+
 const errors= reactive({
     name: '',
     surname:'',
@@ -83,11 +85,12 @@ const form = reactive<Trainer>({
     },
 })
 
+const nameError = useFieldWatcher(() => form.basicInfo.name, validateName, "Nombre inválido");
+const surnameError = useFieldWatcher(() => form.basicInfo.surname, validateName, "Apellido inválido");
+const dniError = useFieldWatcher(() => form.basicInfo.dni, validateDni, "DNI inválido");
+const emailError = useFieldWatcher(() => form.contact.email, validateEmail, "Email inválido");
+
 const handleSubmit =()=>{
-    errors.name = validateName(form.basicInfo.name) ? '': 'Nombre inválido'
-    errors.surname = validateName(form.basicInfo.surname) ? '': 'Apellido inválido'
-    errors.dni = validateDni(form.basicInfo.dni) ? '': 'Dni inválido'
-    errors.email = validateEmail(form.contact.email) ? '': 'Email inválido'
     if(!errors.name && !errors.dni && !errors.email){
         trainerStore.addTrainer({...form})
         changeState()
