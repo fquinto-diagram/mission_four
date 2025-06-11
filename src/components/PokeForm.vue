@@ -1,5 +1,5 @@
 <template>
-    <PokeButton v-if="!newTrainer" text="+"  class="my-5" @click="changeState"/>
+    <PokeButton v-if="!newTrainer" text="+"  class="my-5" @click="changeState" type="submit" />
 
     <div @submit.prevent="handleSubmit" class="mt-8 bg-zinc-200/40 rounded-2xl mx-auto max-w-1/2 shadow-xl">
         <form v-if="newTrainer" class="flex flex-col text-black my-5 ">
@@ -35,10 +35,10 @@
         />
         <span v-if="emailError" class="text-red-500">{{ emailError.error }}</span>
         <div id="Buttons">
-            <PokeButton class="mx-auto" text="Enviar"/>
+            <PokeButton class="mx-auto" text="Enviar" type="submit"/>
         </div>
     </form>
-    <PokeButton v-if="newTrainer" class="mx-auto" text="Atrás" @click="changeState"/>
+    <PokeButton v-if="newTrainer" type="submit" class="mx-auto" text="Atrás" @click="changeState"/>
     </div>
 </template>
 
@@ -65,12 +65,7 @@ const errors= reactive({
 })
 
 const changeState = () => {
-  if (newTrainer.value === true){
-    newTrainer.value = false
-  }
-  else{
-    newTrainer.value = true
-  }
+    newTrainer.value = !newTrainer.value
 }
 
 const form = reactive<Trainer>({

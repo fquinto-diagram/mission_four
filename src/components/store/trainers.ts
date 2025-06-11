@@ -31,6 +31,21 @@ export const useTrainerStore = defineStore("trainer", {
         getTrainerById: (state) => {
             return (trainerId: number) => state.trainers.find(t => t.id === trainerId);
         },
-        getAllTrainers: (state) => state.trainers
+        getAllTrainers: (state) => state.trainers,
+
+        // Getters computats per a la info del Pokémon
+        namePoke: (state) => (trainerId: number) =>
+            state.trainers.find(t => t.id === trainerId)?.pokemon?.forms?.[0]?.name ?? '',
+
+        imgPoke: (state) => (trainerId: number, shinyMap: Record<number, boolean>) => {
+            const trainer = state.trainers.find(t => t.id === trainerId);
+            if (!trainer?.pokemon) return '';
+            return shinyMap[trainerId]
+                ? trainer.pokemon.sprites.front_shiny
+                : trainer.pokemon.sprites.front_default;
+        },
+
+        typePoke: (state) => (trainerId: number) =>
+            state.trainers.find(t => t.id === trainerId)?.pokemon?.types ?? [],
     }
 });
