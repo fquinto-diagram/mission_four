@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Input } from './interface/input.ts'
+import type { Input } from '../interface/input.ts'
 
 const emit = defineEmits(['update:modelValue'])
 

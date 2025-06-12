@@ -1,4 +1,4 @@
-# Misión 3 (PokeApi)
+# Misión 5 (PokeApi 2.0)
 
 Esta es la tercera misión que hago en la empresa, en esta ocasion hemos hecho un programa que consumia la PokeApi.
 
@@ -62,7 +62,7 @@ npm install pinia
 
 ```bash
 git clone <URL del repositorio>
-cd mission_two
+cd mission_five
 ```
 
 **Iniciar Servidor en Local**
