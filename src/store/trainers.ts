@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { Trainer } from '../interface/trainer'
+import type { Trainer } from '../interface/.interface'
 
 export const useTrainerStore = defineStore("trainer", {
     state: () => ({

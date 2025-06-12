@@ -1,5 +1,5 @@
 import { ref, type Ref, computed } from 'vue'   
-import type { Pokemon } from '../interface/pokemon'
+import type { Pokemon } from '../interface/pokemon.interface'
 import api  from '../config/api'
 
 export function useFetch(url: string) {

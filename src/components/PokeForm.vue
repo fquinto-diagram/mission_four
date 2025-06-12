@@ -46,7 +46,7 @@
 import PokeInput from './PokeInput.vue'
 import PokeButton from './PokeButton.vue'
 import { reactive, ref } from 'vue'
-import type { Trainer } from '../interface/trainer.ts'
+import type { Trainer } from '../interface/.interface.ts'
 import { useTrainerStore } from '../store/trainers.ts'
 import { useFormValidation } from '../composables/formValidation.ts'
 import { useFieldWatcher } from '../composables/validationFunction.ts'
@@ -56,17 +56,6 @@ const generateIdTrainer =  Math.floor(Math.random()*100000)
 const newTrainer = ref(false)
 const trainerStore =useTrainerStore()
 const { validateName, validateDni, validateEmail}= useFormValidation()
-
-const errors= reactive({
-    name: '',
-    surname:'',
-    dni:'',
-    email:''
-})
-
-const changeState = () => {
-    newTrainer.value = !newTrainer.value
-}
 
 const form = reactive<Trainer>({
     id: generateIdTrainer,
@@ -79,6 +68,17 @@ const form = reactive<Trainer>({
         email: ''
     },
 })
+
+const errors= reactive({
+    name: '',
+    surname:'',
+    dni:'',
+    email:''
+})
+
+const changeState = () => {
+    newTrainer.value = !newTrainer.value
+}
 
 const nameError = useFieldWatcher(() => form.basicInfo.name, validateName, "Nombre inválido");
 const surnameError = useFieldWatcher(() => form.basicInfo.surname, validateName, "Apellido inválido");

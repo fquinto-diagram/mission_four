@@ -30,7 +30,7 @@ import { useTrainerStore } from '../store/trainers'
 import { reactive } from 'vue'
 import { useFetch } from '../composables/apiFetch'
 import { usePokemon } from '../composables/types'
-import type { Trainer } from '../interface/trainer'
+import type { Trainer } from '../interface/.interface'
 
 const trainerStore = useTrainerStore()
 const shinyMap= reactive<{[id: number]: boolean}>({})

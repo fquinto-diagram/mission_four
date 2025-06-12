@@ -1,7 +1,6 @@
 <template>
 <input 
     @input="handleInput"
-    :type="type"
     :value="modelValue"
     :placeholder="placeholder"
     :required="required"
@@ -10,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Input } from '../interface/input.ts'
+import type { Input } from '../interface/input.interface.ts'
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -21,8 +20,7 @@ const handleInput = (event: Event) =>{
 
 withDefaults(defineProps<Input>(),{
     placeholder: '',
-    type: '',
-    label: '',
+    type: 'text',
     modelValue: '',
     required: false
 })
