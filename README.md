@@ -1,5 +1,78 @@
-# Vue 3 + TypeScript + Vite
+# Misión 5 (PokeApi 2.0)
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Esta es la tercera misión que hago en la empresa, en esta ocasion hemos hecho un programa que consumia la PokeApi.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+---
+
+## Tecnologías utilizas
+
+
+| Tecnología utilizada  | Versión |
+|---------------------- |---------|
+| Tailwind              | 4.x.x   |
+| npm                   | 10.x    |
+| Vite                  | 5.x.x   |
+
+---
+
+## Instalación de Tailwind
+
+Primero tendremos que instalar el framework des de las librerias de npm.
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+Una vez ya tenemos el framework instalado tendremos que editar el archivo **vite.config.ts** y añadir estas linias:
+
+```bash
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+  ],
+})
+```
+
+Luego en la oja de estilos, tendremos que importat el framework:
+
+```bash
+@import "tailwindcss";
+```
+## Instalació de otras librerias
+
+Para poder hacer peticiones a la API, tendremos que usar la libreria Axios, para instalarla tendremos que:
+
+```bash
+npm install axios
+```
+Tambien por el tema de enrutamineto tendremos que instalar la libreria de vue-router:
+
+```bash
+npm install vue-router 
+```
+
+Para el guardado del formulario de Entrenadores usaremos Pinia:
+
+```bash
+npm install pinia
+```
+## Instalació 
+
+```bash
+git clone <URL del repositorio>
+cd mission_five
+```
+
+**Iniciar Servidor en Local**
+
+```bash
+npm run dev
+```
+La apliacacion estara en:
+
+```bash
+http://localhost:5173
+```
+
