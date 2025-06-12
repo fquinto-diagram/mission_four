@@ -1,8 +1,8 @@
 <template>
     <PokeButton v-if="!newTrainer" text="+"  class="my-5" @click="changeState" type="submit" />
 
-    <div @submit.prevent="handleSubmit" class="mt-8 bg-zinc-200/40 rounded-2xl mx-auto max-w-1/2 shadow-xl">
-        <form v-if="newTrainer" class="flex flex-col text-black my-5 ">
+    <div class="mt-8 bg-zinc-200/40 rounded-2xl mx-auto max-w-1/2 shadow-xl">
+        <form v-if="newTrainer" @submit.prevent="handleSubmit" class="flex flex-col text-black my-5 ">
         
         <h1 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">Nuevo Entrenador</h1>
 
@@ -37,7 +37,7 @@
         <div id="Buttons">
             <PokeButton class="mx-auto" text="Enviar" type="submit"/>
         </div>
-    </form>
+        </form>
     <PokeButton v-if="newTrainer" type="submit" class="mx-auto" text="Atrás" @click="changeState"/>
     </div>
 </template>
@@ -46,10 +46,10 @@
 import PokeInput from './PokeInput.vue'
 import PokeButton from './PokeButton.vue'
 import { reactive, ref } from 'vue'
-import type { Trainer } from './interface/trainer.ts'
-import { useTrainerStore } from './store/trainers.ts'
-import { useFormValidation } from './composables/formValidation.ts'
-import { useFieldWatcher } from './composables/validationFunction.ts'
+import type { Trainer } from '../interface/trainer.ts'
+import { useTrainerStore } from '../store/trainers.ts'
+import { useFormValidation } from '../composables/formValidation.ts'
+import { useFieldWatcher } from '../composables/validationFunction.ts'
 
 
 const generateIdTrainer =  Math.floor(Math.random()*100000)

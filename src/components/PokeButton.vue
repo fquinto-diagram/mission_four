@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { type Props } from './interface/button';
+import { type Props } from '../interface/button';
 
 const {text , type} = defineProps<Props>()
 

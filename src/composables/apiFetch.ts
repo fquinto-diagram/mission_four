@@ -1,6 +1,6 @@
 import { ref, type Ref, computed } from 'vue'   
 import type { Pokemon } from '../interface/pokemon'
-import api  from './api'
+import api  from '../config/api'
 
 export function useFetch(url: string) {
     const pokemon: Ref<Pokemon | null> = ref(null)

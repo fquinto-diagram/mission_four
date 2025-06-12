@@ -21,7 +21,7 @@
         <img :src="pokeImg" :alt="pokeName" style="cursor:pointer" @click="toggleShiny" class=" rounded-2xl hover:shadow-xl hover:bg-zinc-300/50 mx-5 w-40">
         <div>
           <h2 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">{{ pokeName }} {{ isShiny ? '✨':''  }}</h2>
-          <span v-for="type in pokeTypes" :key="type.type.name" :class="getTypeColor(type.type.name)">{{ type.type.name }}</span>
+          <span v-for="type in pokeTypes" :key="type.type.name" :class="usePokemon(type.type.name)">{{ type.type.name }}</span>
         </div>
       </div>
       <PokeButton @click="startSearch" text="Nuevo Pokémon" class="mb-5 mx-auto" type="submit"/>
@@ -38,9 +38,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useFetch } from './composables/apiFetch'
+import { useFetch } from '../composables/apiFetch'
 import PokeButton from './PokeButton.vue'
-import { getTypeColor } from './composables/types'
+import { usePokemon } from '../composables/types'
 
 
 const hasStarted = ref(false)

@@ -1,4 +1,4 @@
-export function getTypeColor(type: string){
+export function usePokemon(type: string){
   const colors: Record<string, string> = {
     normal: 'bg-gray-400 text-white justify-center mx-autp my-2 ml-2 px-3 rounded-2xl',
     fire: 'bg-red-500 text-white justify-center mx-autp my-2 ml-2 px-3 rounded-2xl',
