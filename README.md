@@ -62,7 +62,7 @@ npm install pinia
 
 ```bash
 git clone <URL del repositorio>
-cd mission_five
+cd misson_four
 ```
 
 **Iniciar Servidor en Local**

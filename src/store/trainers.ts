@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { Trainer } from '../interface/trainer'
+import type { Trainer } from '../interface/trainer.interface'
 
 export const useTrainerStore = defineStore("trainer", {
     state: () => ({
@@ -33,7 +33,6 @@ export const useTrainerStore = defineStore("trainer", {
         },
         getAllTrainers: (state) => state.trainers,
 
-        // Getters computats per a la info del Pokémon
         namePoke: (state) => (trainerId: number) =>
             state.trainers.find(t => t.id === trainerId)?.pokemon?.forms?.[0]?.name ?? '',
 

@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import { type Props } from '../interface/button';
+import type { Button } from '../interface/button.interface';
 
-const {text , type} = defineProps<Props>()
+const {text , type} = defineProps<Button>()
 
 defineEmits(['click'])
 </script>
