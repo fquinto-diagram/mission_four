@@ -1,8 +1,7 @@
 <template>
-    <PokeButton v-if="!newTrainer" text="+"  class="my-5" @click="changeState" type="submit" />
 
     <div class="mt-8 bg-zinc-200/40 rounded-2xl mx-auto max-w-1/2 shadow-xl">
-        <form v-if="newTrainer" @submit.prevent="handleSubmit" class="flex flex-col text-black my-5 ">
+        <form @submit.prevent="handleSubmit" class="flex flex-col text-black my-5 ">
         
         <h1 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">Nuevo Entrenador</h1>
 
@@ -38,7 +37,6 @@
             <PokeButton class="mx-auto" text="Enviar" type="submit"/>
         </div>
         </form>
-    <PokeButton v-if="newTrainer" type="submit" class="mx-auto" text="Atrás" @click="changeState"/>
     </div>
 </template>
 
@@ -46,14 +44,13 @@
 import PokeInput from './PokeInput.vue'
 import PokeButton from './PokeButton.vue'
 import { reactive, ref } from 'vue'
-import type { Trainer } from '../interface/.interface.ts'
+import type { Trainer } from '../interface/trainer.interface.ts'
 import { useTrainerStore } from '../store/trainers.ts'
 import { useFormValidation } from '../composables/formValidation.ts'
 import { useFieldWatcher } from '../composables/validationFunction.ts'
 
 
 const generateIdTrainer =  Math.floor(Math.random()*100000)
-const newTrainer = ref(false)
 const trainerStore =useTrainerStore()
 const { validateName, validateDni, validateEmail}= useFormValidation()
 
@@ -76,10 +73,6 @@ const errors= reactive({
     email:''
 })
 
-const changeState = () => {
-    newTrainer.value = !newTrainer.value
-}
-
 const nameError = useFieldWatcher(() => form.basicInfo.name, validateName, "Nombre inválido");
 const surnameError = useFieldWatcher(() => form.basicInfo.surname, validateName, "Apellido inválido");
 const dniError = useFieldWatcher(() => form.basicInfo.dni, validateDni, "DNI inválido");
@@ -88,7 +81,6 @@ const emailError = useFieldWatcher(() => form.contact.email, validateEmail, "Ema
 const handleSubmit =()=>{
     if(!errors.name && !errors.dni && !errors.email){
         trainerStore.addTrainer({...form})
-        changeState()
     }
 }
 </script>

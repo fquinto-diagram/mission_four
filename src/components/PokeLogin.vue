@@ -22,11 +22,11 @@
 import PokeInput from './PokeInput.vue'
 import PokeButton from './PokeButton.vue'
 import { reactive, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useAuth } from '../auth/useAuth'
 
 const { login } = useAuth()
-const router = useRoute()
+const router = useRouter()
 
 const form = reactive({
   email: '',
@@ -41,7 +41,7 @@ function handleLogin() {
     error.value = ''
     success.value = '¡Login correcto!'
     login()
-    router.push('/Pokedex')
+    router.push('/Dashboard')
   } else {
     success.value = ''
     error.value = 'Email o contraseña incorrectos'
