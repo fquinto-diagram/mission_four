@@ -9,21 +9,16 @@
 </template>
 
 <script setup lang="ts">
-import type { Input } from '../interface/input.interface.ts'
+import type { Input } from '../interface/input.interface'
 
+
+const {modelValue, placeholder, required} = defineProps<Input>()
 const emit = defineEmits(['update:modelValue'])
 
 const handleInput = (event: Event) =>{
     const value = (event.target as HTMLInputElement).value
     emit('update:modelValue', value)
 }
-
-withDefaults(defineProps<Input>(),{
-    placeholder: '',
-    type: 'text',
-    modelValue: '',
-    required: false
-})
 
 </script>
 

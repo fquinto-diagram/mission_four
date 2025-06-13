@@ -1,60 +1,53 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAuth } from '../auth/useAuth'
-import PublicLayout from '../layouts/PublicLayout.vue'
-import DefaultLayout from '../layouts/DefaultLayout.vue'
-import PokeLogin from '../components/PokeLogin.vue'
-import Error404 from '../components/Error404.vue'
-import PokeDex from '../components/PokeDex.vue'
-import PokeDashBoard from '../components/PokeDashBoard.vue'
-import PokeList from '../components/PokeList.vue'
-import PokeForm from '../components/PokeForm.vue'
+import { useAuthStore } from '../store/useAuthStore'
 
-export const routes = [
+const routes = [
   {
     path: '/',
-    component: PublicLayout,
+    component: ()=> import('../layouts/PublicLayout.vue'),
     children: [
       {
         path: '',
         name: 'login',
-        component: PokeLogin
+        component: ()=> import('../components/PokeLogin.vue'),
       },
       {
         path: '404',
         name: 'not-found',
-        component: Error404
+        component: ()=> import('../components/Error404.vue'),
       }
     ]
   },
   {
-    path: '/',
-    component: DefaultLayout,
+    path: '/app',
+    component: ()=> import('../layouts/DefaultLayout.vue'),
     children: [
       { 
-        path: 'Dashboard', 
+        path: 'dashboard', 
         name: 'dashboard',
-        component: PokeDashBoard 
+        component: ()=> import('../components/PokeDashBoard.vue'),
       },
       { 
-        path: 'Trainers', 
+        path: 'trainers', 
         name: 'trainers',
-        component: PokeList 
+        component: ()=> import('../components/PokeList.vue'),
       },
       { 
-        path: 'Pokedex', 
+        path: 'pokedex', 
         name: 'pokedex',
-        component: PokeDex 
+        component: ()=> import('../components/PokeDex.vue'),
       },
       {
-        path: 'Form',
-        name: 'form',
-        component: PokeForm
+        path: 'create-trainers',
+        name: 'create-trainers',
+        component: ()=> import('../components/PokeForm.vue'),
       }
     ]
   },
   {
-    path: '/:pathMatch(.*)*',
-    redirect: '/404'
+    path: '/:pathMatch(.*)',
+    name: 'not-found',
+    component: () => import('../components/Error404.vue')
   }
 ]
 
@@ -64,17 +57,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _from, next) => {
-  const { isLoggedIn, checkLogin } = useAuth()
-  checkLogin()
-  
-  // Allow access to public routes
-  if (to.path.startsWith('/app')) {
-    // Check authentication for protected routes
-    if (!isLoggedIn.value) {
-      next({ name: 'login' })
-    } else {
-      next()
-    }
+  const authStore = useAuthStore()
+  authStore.checkAuth()
+
+  if (to.path.startsWith('/app') && !authStore.isLoggedIn) {
+    next({ name: 'login' })
   } else {
     next()
   }

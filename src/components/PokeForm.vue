@@ -43,13 +43,14 @@
 <script setup lang="ts">
 import PokeInput from './PokeInput.vue'
 import PokeButton from './PokeButton.vue'
-import { reactive, ref } from 'vue'
-import type { Trainer } from '../interface/trainer.interface.ts'
+import { reactive } from 'vue'
 import { useTrainerStore } from '../store/trainers.ts'
 import { useFormValidation } from '../composables/formValidation.ts'
 import { useFieldWatcher } from '../composables/validationFunction.ts'
+import { useRouter } from 'vue-router'
+import type { Trainer } from '../interface/trainer.interface.ts'
 
-
+const router = useRouter()
 const generateIdTrainer =  Math.floor(Math.random()*100000)
 const trainerStore =useTrainerStore()
 const { validateName, validateDni, validateEmail}= useFormValidation()
@@ -81,6 +82,7 @@ const emailError = useFieldWatcher(() => form.contact.email, validateEmail, "Ema
 const handleSubmit =()=>{
     if(!errors.name && !errors.dni && !errors.email){
         trainerStore.addTrainer({...form})
+        router.push({name: 'trainers'})
     }
 }
 </script>

@@ -1,14 +1,14 @@
 <template>
   <div class="grid grid-cols-2 content-around">
     <div v-for="trainer in trainerStore.getAllTrainers" :key="trainer.id" class="my-4 bg-zinc-200/40 rounded-2xl mx-3 max-w-2xl shadow-xl ">
-        <h1 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">{{ trainer.basicInfo.name }}</h1>
+        <h1 class="capitalize bg-gradient-to-r pb-2 from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">{{ trainer.basicInfo.name }}</h1>
         <div class="grid grid-cols-2 ">
             <div id="BasicInfo" class="text-black">
                 <h2 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">DNI</h2>
                 <p>{{ trainer.basicInfo.dni }}</p>
                 <h2 class="capitalize bg-gradient-to-r from-blue-300 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">E-Mail</h2>
                 <p>{{ trainer.contact.email }}</p>
-                <PokeButton @click="remove(trainer)" text="Eliminar"/>
+                <PokeButton @click="remove(trainer)" text="Eliminar" class="my-4"/>
             </div>
             <div v-if="!trainer.pokemon?.id">
                 <PokeButton text="Assignar Pokémon" @click="()=>asignPokemon(trainer, genreateId())" />
