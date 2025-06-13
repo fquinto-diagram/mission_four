@@ -60,11 +60,17 @@ router.beforeEach((to, _from, next) => {
   const authStore = useAuthStore()
   authStore.checkAuth()
 
+  if (to.name === 'login' && authStore.isLoggedIn) {
+    next({ name: 'dashboard' })
+    return
+  }
+
   if (to.path.startsWith('/app') && !authStore.isLoggedIn) {
     next({ name: 'login' })
-  } else {
-    next()
+    return
   }
+
+  next()
 })
 
 export default router
